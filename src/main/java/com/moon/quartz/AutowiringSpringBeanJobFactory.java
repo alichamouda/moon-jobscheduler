@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz;
+package com.moon.quartz;
 
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.BeansException;

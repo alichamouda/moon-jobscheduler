@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz.service;
+package com.moon.quartz.service;
 
 import static org.quartz.JobKey.jobKey;
 
 import java.util.Objects;
 import java.util.Set;
 
+import com.moon.quartz.model.JobDescriptor;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -28,8 +29,6 @@ import org.quartz.SchedulerException;
 import org.quartz.Trigger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.juliuskrah.quartz.model.JobDescriptor;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,11 +75,7 @@ public class EmailService extends AbstractJobService {
 			JobDetail oldJobDetail = scheduler.getJobDetail(jobKey(name, group));
 			if (Objects.nonNull(oldJobDetail)) {
 				JobDataMap jobDataMap = oldJobDetail.getJobDataMap();
-				jobDataMap.put("subject", descriptor.getSubject());
-				jobDataMap.put("messageBody", descriptor.getMessageBody());
-				jobDataMap.put("to", descriptor.getTo());
-				jobDataMap.put("cc", descriptor.getCc());
-				jobDataMap.put("bcc", descriptor.getBcc());
+				jobDataMap.put("randomField", descriptor.getRandomField());
 				JobBuilder jb = oldJobDetail.getJobBuilder();
 				JobDetail newJobDetail = jb.usingJobData(jobDataMap).storeDurably().build();
 				scheduler.addJob(newJobDetail, true);

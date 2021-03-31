@@ -13,24 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz.job;
-
-import static org.springframework.util.CollectionUtils.isEmpty;
-
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
+package com.moon.quartz.job;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
-import com.juliuskrah.quartz.service.AsyncMailSender;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -51,22 +38,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Setter
 public class EmailJob implements Job {
-	@Autowired
-	private JavaMailSender mailSender;
-	@Autowired
-	private AsyncMailSender asyncMailSender;
-	private String subject;
-	private String messageBody;
-	private List<String> to;
-	private List<String> cc;
-	private List<String> bcc;
+
+	// this is supposed to call AsyncMailSender
+	// todo might require autowire of services => this calls service for task job execution
+	private String randomField;
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		log.info("Job triggered to send email to {}", to);
+		log.info("Job triggered to send email to ...");
 		sendEmail();
 		log.info("Job completed");
 	}
@@ -75,25 +57,7 @@ public class EmailJob implements Job {
 	 * Iterates through the list of email and sends email to recipients
 	 */
 	private void sendEmail() {
-		MimeMessage message = mailSender.createMimeMessage();
-
-		try {
-			MimeMessageHelper helper = new MimeMessageHelper(message, false);
-			for (String receipient : to) {
-				helper.setFrom("jk@juliuskrah.com", "Julius from Dynamic Quartz");
-				helper.setTo(receipient);
-				helper.setSubject(subject);
-				helper.setText(messageBody);
-				if (!isEmpty(cc))
-					helper.setCc(cc.stream().toArray(String[]::new));
-				if (!isEmpty(bcc))
-					helper.setBcc(bcc.stream().toArray(String[]::new));
-				asyncMailSender.send(message);
-			}
-		} catch (MessagingException | UnsupportedEncodingException e) {
-			log.error("An error occurred: {}", e.getLocalizedMessage());
-		}
-
+		System.out.println("Sending mail ..."+randomField);
 	}
 
 }

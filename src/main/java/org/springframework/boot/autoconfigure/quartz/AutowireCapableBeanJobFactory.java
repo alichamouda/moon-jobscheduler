@@ -40,7 +40,8 @@ public class AutowireCapableBeanJobFactory extends SpringBeanJobFactory {
 	protected Object createJobInstance(TriggerFiredBundle bundle) throws Exception {
 		Object jobInstance = super.createJobInstance(bundle);
 		this.beanFactory.autowireBean(jobInstance);
-		this.beanFactory.initializeBean(jobInstance, null);
+		// todo Here added jobNabme jobInstance
+		this.beanFactory.initializeBean(jobInstance, "jobInstance");
 		return jobInstance;
 	}
 }

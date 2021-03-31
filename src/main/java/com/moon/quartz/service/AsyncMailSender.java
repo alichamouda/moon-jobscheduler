@@ -13,13 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz.service;
+package com.moon.quartz.service;
 
 import java.util.concurrent.CompletableFuture;
-
-import javax.mail.internet.MimeMessage;
-
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -31,18 +27,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class AsyncMailSender {
-	private final JavaMailSender mailSender;
 
-	public CompletableFuture<String> send(MimeMessage message) {
+
+
+	public CompletableFuture<String> send(String message) {
 		log.debug("Starting async mail send");
-		mailSender.send(message);
+		System.out.println("Sending Emial from Async Mail Sender ...");
 		log.debug("Async mail sent");
 		return CompletableFuture.completedFuture("Mail sent successfully");
 	}
 
-	public CompletableFuture<String> send(MimeMessage... message) {
+	public CompletableFuture<String> send(String... message) {
 		log.debug("Starting async mail send");
-		mailSender.send(message);
+		System.out.println("Sending Emial from Async Mail Sender ...");
 		log.debug("Async mail sent");
 		return CompletableFuture.completedFuture("Mail sent successfully");
 	}

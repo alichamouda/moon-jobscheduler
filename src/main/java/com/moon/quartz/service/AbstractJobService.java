@@ -13,19 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz.service;
+package com.moon.quartz.service;
 
 import static org.quartz.JobKey.jobKey;
 
 import java.util.Objects;
 import java.util.Optional;
 
+import com.moon.quartz.model.JobDescriptor;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.juliuskrah.quartz.model.JobDescriptor;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +52,6 @@ public abstract class AbstractJobService implements JobService {
 	@Transactional(readOnly = true)
 	@Override
 	public Optional<JobDescriptor> findJob(String group, String name) {
-		// @formatter:off
 		try {
 			JobDetail jobDetail = scheduler.getJobDetail(jobKey(name, group));
 			if(Objects.nonNull(jobDetail))
@@ -63,7 +61,6 @@ public abstract class AbstractJobService implements JobService {
 		} catch (SchedulerException e) {
 			log.error("Could not find job with key - {}.{} due to error - {}", group, name, e.getLocalizedMessage());
 		}
-		// @formatter:on
 		log.warn("Could not find job with key - {}.{}", group, name);
 		return Optional.empty();
 	}

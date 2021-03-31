@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz.service;
+package com.moon.quartz.service;
 
 import java.util.Optional;
 
-import com.juliuskrah.quartz.model.JobDescriptor;
+import com.moon.quartz.model.JobDescriptor;
 
 /**
  * An object that defines the contract for defining dynamic jobs

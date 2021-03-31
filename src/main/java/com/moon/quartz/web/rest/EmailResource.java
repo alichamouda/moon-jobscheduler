@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz.web.rest;
+package com.moon.quartz.web.rest;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
-import javax.validation.Valid;
 
+import com.moon.quartz.model.JobDescriptor;
+import com.moon.quartz.service.JobService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,9 +30,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.juliuskrah.quartz.model.JobDescriptor;
-import com.juliuskrah.quartz.service.JobService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -49,7 +47,7 @@ public class EmailResource {
 	 * @return
 	 */
 	@PostMapping(path = "/groups/{group}/jobs")
-	public ResponseEntity<JobDescriptor> createJob(@PathVariable String group, @Valid @RequestBody JobDescriptor descriptor) {
+	public ResponseEntity<JobDescriptor> createJob(@PathVariable String group, @RequestBody JobDescriptor descriptor) {
 		return new ResponseEntity<>(jobService.createJob(group, descriptor), CREATED);
 	}
 

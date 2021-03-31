@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.juliuskrah.quartz;
+package com.moon.quartz;
 
 import java.util.concurrent.Executor;
 import javax.sql.DataSource;
@@ -35,16 +35,23 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @SpringBootApplication
 @EnableConfigurationProperties(QuartzProperties.class)
 public class Application implements AsyncConfigurer {
+
+	private final QuartzProperties properties;
+
 	@Autowired
-	private QuartzProperties properties;
+	public Application(QuartzProperties properties) {
+		this.properties = properties;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Bean
-	public SchedulerFactoryBean schedulerFactory(ApplicationContext applicationContext, 
-		DataSource dataSource, Executor taskExecutor) {
+	public SchedulerFactoryBean schedulerFactory(
+			ApplicationContext applicationContext,
+			DataSource dataSource,
+			Executor taskExecutor) {
 		SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
 		schedulerFactoryBean.setDataSource(dataSource);
 		schedulerFactoryBean.setConfigLocation(properties.getConfigLocation());
