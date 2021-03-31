@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.quartz;
+package com.moon.jobscheduler;
 
 import java.util.concurrent.Executor;
 import javax.sql.DataSource;
@@ -34,17 +34,17 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @EnableAsync
 @SpringBootApplication
 @EnableConfigurationProperties(QuartzProperties.class)
-public class Application implements AsyncConfigurer {
+public class JobSchedulerApplication implements AsyncConfigurer {
 
 	private final QuartzProperties properties;
 
 	@Autowired
-	public Application(QuartzProperties properties) {
+	public JobSchedulerApplication(QuartzProperties properties) {
 		this.properties = properties;
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(JobSchedulerApplication.class, args);
 	}
 
 	@Bean

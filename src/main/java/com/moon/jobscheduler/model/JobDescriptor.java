@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.quartz.model;
+package com.moon.jobscheduler.model;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,7 +30,7 @@ import org.quartz.Trigger;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moon.quartz.job.EmailJob;
+import com.moon.jobscheduler.job.EmailJob;
 
 import lombok.Data;
 

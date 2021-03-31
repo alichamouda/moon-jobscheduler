@@ -1,4 +1,4 @@
-package com.moon.quartz;
+package com.moon.jobscheduler;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;

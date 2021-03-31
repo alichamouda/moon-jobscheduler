@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.quartz.service;
+package com.moon.jobscheduler.service;
 
 import java.util.concurrent.CompletableFuture;
 import org.springframework.scheduling.annotation.Async;

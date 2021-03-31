@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.quartz.service;
+package com.moon.jobscheduler.service;
 
 import java.util.Optional;
 
-import com.moon.quartz.model.JobDescriptor;
+import com.moon.jobscheduler.model.JobDescriptor;
 
 /**
  * An object that defines the contract for defining dynamic jobs
