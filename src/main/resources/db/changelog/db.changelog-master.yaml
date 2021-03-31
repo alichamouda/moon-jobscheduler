@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1506785516870-1
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -27,7 +27,7 @@ databaseChangeLog:
             tableName: QRTZ_BLOB_TRIGGERS
   - changeSet:
       id: 1506785516870-2
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -50,7 +50,7 @@ databaseChangeLog:
             tableName: QRTZ_CALENDARS
   - changeSet:
       id: 1506785516870-3
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -81,7 +81,7 @@ databaseChangeLog:
             tableName: QRTZ_CRON_TRIGGERS
   - changeSet:
       id: 1506785516870-4
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -146,7 +146,7 @@ databaseChangeLog:
             tableName: QRTZ_FIRED_TRIGGERS
   - changeSet:
       id: 1506785516870-5
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -200,7 +200,7 @@ databaseChangeLog:
             tableName: QRTZ_JOB_DETAILS
   - changeSet:
       id: 1506785516870-6
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -218,7 +218,7 @@ databaseChangeLog:
             tableName: QRTZ_LOCKS
   - changeSet:
       id: 1506785516870-7
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -236,7 +236,7 @@ databaseChangeLog:
             tableName: QRTZ_PAUSED_TRIGGER_GRPS
   - changeSet:
       id: 1506785516870-8
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -264,7 +264,7 @@ databaseChangeLog:
             tableName: QRTZ_SCHEDULER_STATE
   - changeSet:
       id: 1506785516870-9
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -302,7 +302,7 @@ databaseChangeLog:
             tableName: QRTZ_SIMPLE_TRIGGERS
   - changeSet:
       id: 1506785516870-10
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -358,7 +358,7 @@ databaseChangeLog:
             tableName: QRTZ_SIMPROP_TRIGGERS
   - changeSet:
       id: 1506785516870-11
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createTable:
@@ -430,7 +430,7 @@ databaseChangeLog:
             tableName: QRTZ_TRIGGERS
   - changeSet:
       id: 1506785516870-12
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -439,7 +439,7 @@ databaseChangeLog:
             tableName: QRTZ_JOB_DETAILS
   - changeSet:
       id: 1506785516870-13
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -448,7 +448,7 @@ databaseChangeLog:
             tableName: QRTZ_TRIGGERS
   - changeSet:
       id: 1506785516870-14
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -457,7 +457,7 @@ databaseChangeLog:
             tableName: QRTZ_SIMPLE_TRIGGERS
   - changeSet:
       id: 1506785516870-15
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -466,7 +466,7 @@ databaseChangeLog:
             tableName: QRTZ_CRON_TRIGGERS
   - changeSet:
       id: 1506785516870-16
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -475,7 +475,7 @@ databaseChangeLog:
             tableName: QRTZ_SIMPROP_TRIGGERS
   - changeSet:
       id: 1506785516870-17
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -484,7 +484,7 @@ databaseChangeLog:
             tableName: QRTZ_BLOB_TRIGGERS
   - changeSet:
       id: 1506785516870-18
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -493,7 +493,7 @@ databaseChangeLog:
             tableName: QRTZ_CALENDARS
   - changeSet:
       id: 1506785516870-19
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -502,7 +502,7 @@ databaseChangeLog:
             tableName: QRTZ_PAUSED_TRIGGER_GRPS
   - changeSet:
       id: 1506785516870-20
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -511,7 +511,7 @@ databaseChangeLog:
             tableName: QRTZ_FIRED_TRIGGERS
   - changeSet:
       id: 1506785516870-21
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -520,7 +520,7 @@ databaseChangeLog:
             tableName: QRTZ_SCHEDULER_STATE
   - changeSet:
       id: 1506785516870-22
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addPrimaryKey:
@@ -529,7 +529,7 @@ databaseChangeLog:
             tableName: QRTZ_LOCKS
   - changeSet:
       id: 1506785516870-23
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - createIndex:
@@ -544,7 +544,7 @@ databaseChangeLog:
             tableName: QRTZ_TRIGGERS
   - changeSet:
       id: 1506785516870-24
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addForeignKeyConstraint:
@@ -559,7 +559,7 @@ databaseChangeLog:
             referencedTableName: QRTZ_JOB_DETAILS
   - changeSet:
       id: 1506785516870-25
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addForeignKeyConstraint:
@@ -574,7 +574,7 @@ databaseChangeLog:
             referencedTableName: QRTZ_TRIGGERS
   - changeSet:
       id: 1506785516870-26
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addForeignKeyConstraint:
@@ -589,7 +589,7 @@ databaseChangeLog:
             referencedTableName: QRTZ_TRIGGERS
   - changeSet:
       id: 1506785516870-27
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addForeignKeyConstraint:
@@ -604,7 +604,7 @@ databaseChangeLog:
             referencedTableName: QRTZ_TRIGGERS
   - changeSet:
       id: 1506785516870-28
-      author: Julius
+      author: Admin
       objectQuotingStrategy: QUOTE_ALL_OBJECTS
       changes:
         - addForeignKeyConstraint:
