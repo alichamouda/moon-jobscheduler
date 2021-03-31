@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.jobscheduler.service;
+package com.moon.jobscheduler._moonquartz.services;
 
 import static org.quartz.JobKey.jobKey;
 
 import java.util.Objects;
 import java.util.Optional;
 
-import com.moon.jobscheduler.model.JobDescriptor;
+import com.moon.jobscheduler._moonquartz.dtos.JobDescriptor;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;

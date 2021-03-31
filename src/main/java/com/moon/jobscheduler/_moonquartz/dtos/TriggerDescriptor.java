@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.jobscheduler.model;
+package com.moon.jobscheduler._moonquartz.dtos;
 
 import static java.time.ZoneId.systemDefault;
 import static java.util.UUID.randomUUID;

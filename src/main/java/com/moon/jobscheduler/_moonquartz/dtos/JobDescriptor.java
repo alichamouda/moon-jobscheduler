@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.jobscheduler.model;
+package com.moon.jobscheduler._moonquartz.dtos;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -30,7 +30,7 @@ import org.quartz.Trigger;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moon.jobscheduler.job.EmailJob;
+import com.moon.jobscheduler._moonquartz.jobs.SampleJob;
 
 import lombok.Data;
 
@@ -102,7 +102,7 @@ public class JobDescriptor {
     public JobDetail buildJobDetail() {
         JobDataMap jobDataMap = new JobDataMap(getData());
         jobDataMap.put("randomField", getRandomField());
-        return newJob(EmailJob.class)
+        return newJob(SampleJob.class)
                 .withIdentity(getName(), getGroup())
                 .usingJobData(jobDataMap)
                 .build();

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.jobscheduler.job;
+package com.moon.jobscheduler._moonquartz.jobs;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -37,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Setter
-public class EmailJob implements Job {
+public class SampleJob implements Job {
 
 	// this is supposed to call AsyncMailSender
 	// todo might require autowire of services => this calls service for task job execution

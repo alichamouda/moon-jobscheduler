@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.jobscheduler.web.rest;
+package com.moon.jobscheduler.controllers;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
 
-import com.moon.jobscheduler.model.JobDescriptor;
-import com.moon.jobscheduler.service.JobService;
+import com.moon.jobscheduler._moonquartz.dtos.JobDescriptor;
+import com.moon.jobscheduler._moonquartz.services.JobService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +36,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1.0")
 @RequiredArgsConstructor
-public class EmailResource {
+public class JobSchedulerController {
 	private final JobService jobService;
 
 	/**

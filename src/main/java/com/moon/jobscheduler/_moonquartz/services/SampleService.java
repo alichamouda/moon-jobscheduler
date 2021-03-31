@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.moon.jobscheduler.service;
+package com.moon.jobscheduler._moonquartz.services;
 
 import static org.quartz.JobKey.jobKey;
 
 import java.util.Objects;
 import java.util.Set;
 
-import com.moon.jobscheduler.model.JobDescriptor;
+import com.moon.jobscheduler._moonquartz.dtos.JobDescriptor;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
@@ -41,9 +41,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @Transactional
-public class EmailService extends AbstractJobService {
+public class SampleService extends AbstractJobService {
 
-	public EmailService(Scheduler scheduler) {
+	public SampleService(Scheduler scheduler) {
 		super(scheduler);
 	}
 

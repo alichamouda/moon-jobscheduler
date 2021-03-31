@@ -66,9 +66,9 @@ public class JobSchedulerApplication implements AsyncConfigurer {
 	public Executor getAsyncExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 		executor.setCorePoolSize(5);
-		executor.setMaxPoolSize(6);
+		executor.setMaxPoolSize(50);
 		executor.setQueueCapacity(100);
-		executor.setThreadNamePrefix("email-");
+		executor.setThreadNamePrefix("job-thread-");
 		return executor;
 	}
 
