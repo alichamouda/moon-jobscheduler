@@ -1,25 +1,7 @@
-/*
- * Copyright 2017 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.moon.jobscheduler._moonquartz.services;
-
 import static org.quartz.JobKey.jobKey;
-
 import java.util.Objects;
 import java.util.Set;
-
 import com.moon.jobscheduler._moonquartz.dtos.JobDescriptor;
 import org.quartz.JobBuilder;
 import org.quartz.JobDataMap;
@@ -27,23 +9,18 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.Trigger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Implementation of {@code JobService} that schedules email dynamically
- * 
- * @author Julius Krah
- * @since September 2017
- */
+
 @Slf4j
 @Service
 @Transactional
-public class SampleService extends AbstractJobService {
+public class IJobService extends AbstractJobService {
 
-	public SampleService(Scheduler scheduler) {
+	public IJobService(@Qualifier("schedulerFactory") Scheduler scheduler) {
 		super(scheduler);
 	}
 
@@ -57,7 +34,7 @@ public class SampleService extends AbstractJobService {
 		Set<Trigger> triggersForJob = descriptor.buildTriggers();
 		log.info("About to save job with key - {}", jobDetail.getKey());
 		try {
-			scheduler.scheduleJob(jobDetail, triggersForJob, false);
+			scheduler.scheduleJob(jobDetail, triggersForJob, true);
 			log.info("Job with key - {} saved sucessfully", jobDetail.getKey());
 		} catch (SchedulerException e) {
 			log.error("Could not save job with key - {} due to error - {}", jobDetail.getKey(), e.getLocalizedMessage());
@@ -75,7 +52,7 @@ public class SampleService extends AbstractJobService {
 			JobDetail oldJobDetail = scheduler.getJobDetail(jobKey(name, group));
 			if (Objects.nonNull(oldJobDetail)) {
 				JobDataMap jobDataMap = oldJobDetail.getJobDataMap();
-				jobDataMap.put("randomField", descriptor.getRandomField());
+				jobDataMap.put("randomField", descriptor.getTopicName());
 				JobBuilder jb = oldJobDetail.getJobBuilder();
 				JobDetail newJobDetail = jb.usingJobData(jobDataMap).storeDurably().build();
 				scheduler.addJob(newJobDetail, true);

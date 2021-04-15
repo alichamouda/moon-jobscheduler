@@ -17,9 +17,12 @@ package com.moon.jobscheduler;
 
 import java.util.concurrent.Executor;
 import javax.sql.DataSource;
+
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.quartz.AutowireCapableBeanJobFactory;
@@ -36,44 +39,53 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @EnableConfigurationProperties(QuartzProperties.class)
 public class JobSchedulerApplication implements AsyncConfigurer {
 
-	private final QuartzProperties properties;
 
-	@Autowired
-	public JobSchedulerApplication(QuartzProperties properties) {
-		this.properties = properties;
-	}
+    @Value("${thread.core-pool-size}")
+    private int threadCorePoolSize;
+    @Value("${thread.max-pool-size}")
+    private int threadMaxPoolSize;
+    @Value("${thread.queue-capacity}")
+    private int threadQueueCapacity;
+    @Value("${thread.name-prefix}")
+    private String threadNamePrefix;
+    private final QuartzProperties properties;
 
-	public static void main(String[] args) {
-		SpringApplication.run(JobSchedulerApplication.class, args);
-	}
+    @Autowired
+    public JobSchedulerApplication(QuartzProperties properties) {
+        this.properties = properties;
+    }
 
-	@Bean
-	public SchedulerFactoryBean schedulerFactory(
-			ApplicationContext applicationContext,
-			DataSource dataSource,
-			Executor taskExecutor) {
-		SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
-		schedulerFactoryBean.setDataSource(dataSource);
-		schedulerFactoryBean.setConfigLocation(properties.getConfigLocation());
-		schedulerFactoryBean.setTaskExecutor(taskExecutor);
-		schedulerFactoryBean.setJobFactory(new AutowireCapableBeanJobFactory(applicationContext.getAutowireCapableBeanFactory()));
-		schedulerFactoryBean.setApplicationContextSchedulerContextKey("applicationContext");
-		return schedulerFactoryBean;
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(JobSchedulerApplication.class, args);
+    }
 
-	@Override
-	@Bean(name = "taskExecutor")
-	public Executor getAsyncExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(5);
-		executor.setMaxPoolSize(50);
-		executor.setQueueCapacity(100);
-		executor.setThreadNamePrefix("job-thread-");
-		return executor;
-	}
+    @Bean
+    public SchedulerFactoryBean schedulerFactory(
+            ApplicationContext applicationContext,
+            DataSource dataSource,
+            @Qualifier("MoonTaskExecutor") Executor taskExecutor) {
+        SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
+        schedulerFactoryBean.setDataSource(dataSource);
+        schedulerFactoryBean.setConfigLocation(properties.getConfigLocation());
+        schedulerFactoryBean.setTaskExecutor(taskExecutor);
+        schedulerFactoryBean.setJobFactory(new AutowireCapableBeanJobFactory(applicationContext.getAutowireCapableBeanFactory()));
+        schedulerFactoryBean.setApplicationContextSchedulerContextKey("applicationContext");
+        return schedulerFactoryBean;
+    }
 
-	@Override
-	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-		return new SimpleAsyncUncaughtExceptionHandler();
-	}
+    @Override
+    @Bean(name = "MoonTaskExecutor")
+    public Executor getAsyncExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(threadCorePoolSize);
+        executor.setMaxPoolSize(threadMaxPoolSize);
+        executor.setQueueCapacity(threadQueueCapacity);
+        executor.setThreadNamePrefix(threadNamePrefix);
+        return executor;
+    }
+
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return new SimpleAsyncUncaughtExceptionHandler();
+    }
 }

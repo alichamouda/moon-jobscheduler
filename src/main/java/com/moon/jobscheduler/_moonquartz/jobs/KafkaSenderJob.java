@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 package com.moon.jobscheduler._moonquartz.jobs;
+
+import com.moon.jobscheduler.services.AsyncKafkaMessageSender;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -21,43 +25,46 @@ import org.quartz.JobExecutionException;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This is an implementation of {@link Job} that executes when triggered to send
  * emails. This job retrieves the list of emails, cc and bcc from the
  * {@code JobDetail} {@code JobDataMap} and passes them to the
  * {@code JavaMailSender} for SMTP transport.
- * 
+ * <p>
  * There setter methods defined that correspond to the keys stored in the
  * JobDateMap that the {@code JobFactory} implementation will set when
  * instantiating this Job.
- * 
+ *
  * @author Julius Krah
  * @since September 2017
  */
 @Slf4j
 @Setter
-public class SampleJob implements Job {
+public class KafkaSenderJob implements Job {
 
-	// this is supposed to call AsyncMailSender
-	// todo might require autowire of services => this calls service for task job execution
-	private String randomField;
+    private String topicName;
+    private String key;
+    private String message;
+    Logger logger = LogManager.getLogger(KafkaSenderJob.class);
+    private final AsyncKafkaMessageSender asyncKafkaMessageSender;
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
-		log.info("Job triggered to send email to ...");
-		sendEmail();
-		log.info("Job completed");
-	}
+    @Autowired
+    public KafkaSenderJob(AsyncKafkaMessageSender asyncKafkaMessageSender) {
+        this.asyncKafkaMessageSender = asyncKafkaMessageSender;
+    }
 
-	/**
-	 * Iterates through the list of email and sends email to recipients
-	 */
-	private void sendEmail() {
-		System.out.println("Sending mail ..."+randomField);
-	}
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void execute(JobExecutionContext context) throws JobExecutionException {
+        logger.info("Job triggered to send Kafka message ...");
+        asyncKafkaMessageSender.sendKafkaMessage(topicName, key, message);
+        logger.info("Job completed");
+    }
+
 
 }

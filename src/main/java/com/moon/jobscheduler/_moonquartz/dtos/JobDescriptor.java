@@ -1,18 +1,3 @@
-/*
- * Copyright 2017 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.moon.jobscheduler._moonquartz.dtos;
 
 import java.util.ArrayList;
@@ -24,27 +9,24 @@ import java.util.Set;
 
 import static org.quartz.JobBuilder.*;
 
+import com.moon.jobscheduler.dtos.ScheduleRequest;
+import com.moon.jobscheduler.dtos.ScheduleRequestTrigger;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.Trigger;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.moon.jobscheduler._moonquartz.jobs.SampleJob;
+import com.moon.jobscheduler._moonquartz.jobs.KafkaSenderJob;
 
 import lombok.Data;
 
-/**
- * An abstraction layer for a JobDetail with its Trigger(s)
- *
- * @author Julius Krah
- * @since September 2017
- */
 @Data
 public class JobDescriptor {
 
-
-    private String randomField;
+    private String topicName;
+    private String key;
+    private String message;
     private String name;
     private String group;
 
@@ -58,10 +40,21 @@ public class JobDescriptor {
         return this;
     }
 
-	public JobDescriptor setRandomField(final String randomField) {
-		this.randomField = randomField;
-		return this;
-	}
+    public JobDescriptor setKey(String key) {
+        this.key = key;
+        return this;
+    }
+
+    public JobDescriptor setMessage(String message) {
+        this.message = message;
+        return this;
+    }
+
+
+    public JobDescriptor setTopicName(final String topicName) {
+        this.topicName = topicName;
+        return this;
+    }
 
     public JobDescriptor setGroup(final String group) {
         this.group = group;
@@ -101,8 +94,11 @@ public class JobDescriptor {
      */
     public JobDetail buildJobDetail() {
         JobDataMap jobDataMap = new JobDataMap(getData());
-        jobDataMap.put("randomField", getRandomField());
-        return newJob(SampleJob.class)
+        jobDataMap.put("topicName", getTopicName());
+        jobDataMap.put("key", getKey());
+        jobDataMap.put("message", getMessage());
+
+        return newJob(KafkaSenderJob.class)
                 .withIdentity(getName(), getGroup())
                 .usingJobData(jobDataMap)
                 .build();
@@ -127,7 +123,32 @@ public class JobDescriptor {
         return new JobDescriptor()
                 .setName(jobDetail.getKey().getName())
                 .setGroup(jobDetail.getKey().getGroup())
-                .setRandomField(jobDetail.getJobDataMap().getString("randomField"))
+                .setMessage(jobDetail.getJobDataMap().getString("message"))
+                .setKey(jobDetail.getJobDataMap().getString("key"))
+                .setTopicName(jobDetail.getJobDataMap().getString("topicName"))
+                .setTriggerDescriptors(triggerDescriptors);
+
+    }
+
+    public static JobDescriptor buildDescriptor(ScheduleRequest scheduleRequest) {
+
+        List<TriggerDescriptor> triggerDescriptors = new ArrayList<>();
+
+        for (ScheduleRequestTrigger requestTrigger : scheduleRequest.getTriggers()) {
+            triggerDescriptors.add(
+                    TriggerDescriptor.buildDescriptor(
+                            scheduleRequest.getName(),
+                            scheduleRequest.getServiceName(),
+                            requestTrigger.getCronTrigger(),
+                            requestTrigger.getDateTrigger()));
+        }
+
+        return new JobDescriptor()
+                .setName(scheduleRequest.getName())
+                .setGroup(scheduleRequest.getServiceName())
+                .setTopicName(scheduleRequest.getTopicName())
+                .setMessage(scheduleRequest.getMessage())
+                .setKey(scheduleRequest.getKey())
                 .setTriggerDescriptors(triggerDescriptors);
 
     }

@@ -24,7 +24,9 @@ import static org.quartz.TriggerBuilder.newTrigger;
 import static org.springframework.util.StringUtils.isEmpty;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
 import org.quartz.JobDataMap;
@@ -111,5 +113,15 @@ public class TriggerDescriptor {
                 .setGroup(trigger.getKey().getGroup())
                 .setFireTime((LocalDateTime) trigger.getJobDataMap().get("fireTime"))
                 .setCron(trigger.getJobDataMap().getString("cron"));
+    }
+
+    public static TriggerDescriptor buildDescriptor(String name, String group, String cronString, String datetime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime dateTime = LocalDateTime.parse(datetime, formatter);
+        return new TriggerDescriptor()
+                .setName(name)
+                .setGroup(group)
+                .setFireTime(dateTime)
+                .setCron(cronString);
     }
 }

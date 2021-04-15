@@ -1,0 +1,34 @@
+{
+  "properties": [
+    {
+      "name": "create-job-topic",
+      "type": "java.lang.String",
+      "description": "Kafka topic that listens to job creation requests"
+    },
+    {
+      "name": "create-job-consumer-group",
+      "type": "java.lang.String",
+      "description": "Kafka consumer group for listening to created Jobs"
+    },
+    {
+      "name": "thread.core-pool-size",
+      "type": "java.lang.Integer",
+      "description": "Thread related parameter"
+    },
+    {
+      "name": "thread.queue-capacity",
+      "type": "java.lang.Integer",
+      "description": "Thread related parameter"
+    },
+    {
+      "name": "thread.name-prefix",
+      "type": "java.lang.Integer",
+      "description": "Thread related parameter"
+    },
+    {
+      "name": "thread.max-pool-size",
+      "type": "java.lang.String",
+      "description": "Thread related parameter"
+    }
+  ]
+}
