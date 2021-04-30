@@ -22,13 +22,14 @@
     },
     {
       "name": "thread.name-prefix",
-      "type": "java.lang.Integer",
+      "type": "java.lang.String",
       "description": "Thread related parameter"
     },
     {
       "name": "thread.max-pool-size",
-      "type": "java.lang.String",
+      "type": "java.lang.Integer",
       "description": "Thread related parameter"
     }
+
   ]
 }

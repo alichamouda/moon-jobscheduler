@@ -17,7 +17,7 @@ public class KafkaTopicConfig {
     @Value(value = "${spring.kafka.bootstrap-servers}")
     private String bootstrapAddress;
 
-    @Value(value = "${create-scheduled-job}")
+    @Value(value = "${create-job-topic}")
     private String creationTopic;
 
     @Bean

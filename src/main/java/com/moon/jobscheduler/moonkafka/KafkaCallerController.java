@@ -24,7 +24,7 @@ public class KafkaCallerController {
     }
 
     @KafkaListener(topics = "${create-job-topic}", groupId = "${create-job-consumer-group}",
-            containerFactory = " scheduleRequestKafkaListenerContainerFactory")
+            containerFactory = "scheduleRequestKafkaListenerContainerFactory")
     public void createJob(@Payload ScheduleRequest scheduleRequest) {
         logger.info("Scheduler has been called. Request object is:");
         logger.info(scheduleRequest);
